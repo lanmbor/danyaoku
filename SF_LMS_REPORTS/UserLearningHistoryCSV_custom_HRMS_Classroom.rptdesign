@@ -1,0 +1,3035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.1.v201408290142 Build &lt;4.4.1.v20140916-1320></property>
+    <simple-property-list name="includeResource">
+        <value>ApplicationResources</value>
+    </simple-property-list>
+    <property name="units">in</property>
+    <property name="theme">PlateauThemes.Plateau_stylesheet</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">Plateau.rptlibrary</property>
+            <property name="namespace">Plateau</property>
+        </structure>
+        <structure>
+            <property name="fileName">PlateauThemes.rptlibrary</property>
+            <property name="namespace">PlateauThemes</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="ReportDestinationCSV" id="2244" extends="Plateau.ReportDestinationCSV"/>
+        <scalar-parameter name="ReportFormatCSV" id="2243" extends="Plateau.ReportFormatCSV"/>
+        <scalar-parameter name="MaskStudentID" id="1919" extends="Plateau.MaskStudentID"/>
+        <scalar-parameter name="CaseSensitiveSearch" id="1920" extends="Plateau.CaseSensitiveSearch"/>
+        <scalar-parameter name="UserSearch" id="1921" extends="Plateau.UserSearch"/>
+        <scalar-parameter name="FromDate" id="1543">
+            <text-property name="promptText">label.CompletedDateFrom</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">dateTime</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ToDate" id="1544">
+            <text-property name="promptText">label.CompletedDateTo</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">dateTime</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ItemSearch" id="107">
+            <xml-property name="customXml"><![CDATA[SelectorName=Component;Type=Component]]></xml-property>
+            <text-property name="promptText">label.Component</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="LastModifiedTimeFrom" id="2437">
+            <text-property name="promptText">Last Modified Time From</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">dateTime</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">yyyy-MM-dd HH:mm:ss</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="LastModifiedTimeTo" id="2438">
+            <text-property name="promptText">Last Modified Time To</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">dateTime</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">yyyy-MM-dd HH:mm:ss</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="PlateauDataSource" id="6"
+ extends="Plateau.PlateauDataSource">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">de.simplicit.vjdbc.VirtualDriverBirtWrapper</property>
+            <property name="odaURL">jdbc:vjdbc:servlet:https://serverurl/vjdbc/vjdbc,db10g</property>
+            <property name="odaUser">sfadmin</property>
+            <encrypted-property name="odaPassword" encryptionID="base64"></encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="students-eventhst-comments" id="2242">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">STUDID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">STUDID</text-property>
+                    <text-property name="heading">STUDID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LASTNAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">LASTNAME</text-property>
+                    <text-property name="heading">LASTNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FIRSTNAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FIRSTNAME</text-property>
+                    <text-property name="heading">FIRSTNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MIDDLENAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MIDDLENAME</text-property>
+                    <text-property name="heading">MIDDLENAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EMP_STAT_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">EMP_STAT_ID</text-property>
+                    <text-property name="heading">EMP_STAT_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EMP_TYP_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">EMP_TYP_ID</text-property>
+                    <text-property name="heading">EMP_TYP_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">JL_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">JL_ID</text-property>
+                    <text-property name="heading">JL_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">JP_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">JP_ID</text-property>
+                    <text-property name="heading">JP_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TARGET_JP_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">TARGET_JP_ID</text-property>
+                    <text-property name="heading">TARGET_JP_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">JOB_TITLE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">JOB_TITLE</text-property>
+                    <text-property name="heading">JOB_TITLE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DMN_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DMN_ID</text-property>
+                    <text-property name="heading">DMN_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ORG_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ORG_ID</text-property>
+                    <text-property name="heading">ORG_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">REGION_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">REGION_ID</text-property>
+                    <text-property name="heading">REGION_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CO_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CO_ID</text-property>
+                    <text-property name="heading">CO_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACTIVE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ACTIVE</text-property>
+                    <text-property name="heading">ACTIVE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ADDR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ADDR</text-property>
+                    <text-property name="heading">ADDR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CITY</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CITY</text-property>
+                    <text-property name="heading">CITY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">STATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">STATE</text-property>
+                    <text-property name="heading">STATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">POSTAL</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">POSTAL</text-property>
+                    <text-property name="heading">POSTAL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CNTRY</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CNTRY</text-property>
+                    <text-property name="heading">CNTRY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUPER</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUPER</text-property>
+                    <text-property name="heading">SUPER</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">COACH_STUD_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">COACH_STUD_ID</text-property>
+                    <text-property name="heading">COACH_STUD_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">HIRE_DTE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">HIRE_DTE</text-property>
+                    <text-property name="heading">HIRE_DTE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TERM_DTE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">TERM_DTE</text-property>
+                    <text-property name="heading">TERM_DTE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EMAIL_ADDR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">EMAIL_ADDR</text-property>
+                    <text-property name="heading">EMAIL_ADDR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">RESUME_LOCN</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">RESUME_LOCN</text-property>
+                    <text-property name="heading">RESUME_LOCN</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">COMMENTS</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">COMMENTS</text-property>
+                    <text-property name="heading">COMMENTS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_NAME</text-property>
+                    <text-property name="heading">SHIPPING_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_CONTACT_NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_CONTACT_NAME</text-property>
+                    <text-property name="heading">SHIPPING_CONTACT_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_ADDR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_ADDR</text-property>
+                    <text-property name="heading">SHIPPING_ADDR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_ADDR1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_ADDR1</text-property>
+                    <text-property name="heading">SHIPPING_ADDR1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_CITY</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_CITY</text-property>
+                    <text-property name="heading">SHIPPING_CITY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_STATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_STATE</text-property>
+                    <text-property name="heading">SHIPPING_STATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_POSTAL</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_POSTAL</text-property>
+                    <text-property name="heading">SHIPPING_POSTAL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_CNTRY</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_CNTRY</text-property>
+                    <text-property name="heading">SHIPPING_CNTRY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_PHON_NUM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_PHON_NUM</text-property>
+                    <text-property name="heading">SHIPPING_PHON_NUM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_FAX_NUM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_FAX_NUM</text-property>
+                    <text-property name="heading">SHIPPING_FAX_NUM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SHIPPING_EMAIL_ADDR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SHIPPING_EMAIL_ADDR</text-property>
+                    <text-property name="heading">SHIPPING_EMAIL_ADDR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">STUD_PSWD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">STUD_PSWD</text-property>
+                    <text-property name="heading">STUD_PSWD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIN</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PIN</text-property>
+                    <text-property name="heading">PIN</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIN_DATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PIN_DATE</text-property>
+                    <text-property name="heading">PIN_DATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ENCRYPTED</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ENCRYPTED</text-property>
+                    <text-property name="heading">ENCRYPTED</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">HAS_ACCESS</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">HAS_ACCESS</text-property>
+                    <text-property name="heading">HAS_ACCESS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_NAME</text-property>
+                    <text-property name="heading">BILLING_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_CONTACT_NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_CONTACT_NAME</text-property>
+                    <text-property name="heading">BILLING_CONTACT_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_ADDR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_ADDR</text-property>
+                    <text-property name="heading">BILLING_ADDR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_ADDR1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_ADDR1</text-property>
+                    <text-property name="heading">BILLING_ADDR1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_CITY</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_CITY</text-property>
+                    <text-property name="heading">BILLING_CITY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_STATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_STATE</text-property>
+                    <text-property name="heading">BILLING_STATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_POSTAL</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_POSTAL</text-property>
+                    <text-property name="heading">BILLING_POSTAL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_CNTRY</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_CNTRY</text-property>
+                    <text-property name="heading">BILLING_CNTRY</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_PHON_NUM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_PHON_NUM</text-property>
+                    <text-property name="heading">BILLING_PHON_NUM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_FAX_NUM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_FAX_NUM</text-property>
+                    <text-property name="heading">BILLING_FAX_NUM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BILLING_EMAIL_ADDR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BILLING_EMAIL_ADDR</text-property>
+                    <text-property name="heading">BILLING_EMAIL_ADDR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SELF_REGISTRATION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SELF_REGISTRATION</text-property>
+                    <text-property name="heading">SELF_REGISTRATION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SELF_REGISTRATION_DATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SELF_REGISTRATION_DATE</text-property>
+                    <text-property name="heading">SELF_REGISTRATION_DATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACCESS_TO_ORG_FIN_ACT</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ACCESS_TO_ORG_FIN_ACT</text-property>
+                    <text-property name="heading">ACCESS_TO_ORG_FIN_ACT</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NOTIFY_DEV_PLAN_ITEM_ADD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">NOTIFY_DEV_PLAN_ITEM_ADD</text-property>
+                    <text-property name="heading">NOTIFY_DEV_PLAN_ITEM_ADD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NOTIFY_DEV_PLAN_ITEM_MOD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">NOTIFY_DEV_PLAN_ITEM_MOD</text-property>
+                    <text-property name="heading">NOTIFY_DEV_PLAN_ITEM_MOD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NOTIFY_DEV_PLAN_ITEM_REMOVE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">NOTIFY_DEV_PLAN_ITEM_REMOVE</text-property>
+                    <text-property name="heading">NOTIFY_DEV_PLAN_ITEM_REMOVE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NOTIFY_WHEN_SUB_ITEM_COMPLETE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">NOTIFY_WHEN_SUB_ITEM_COMPLETE</text-property>
+                    <text-property name="heading">NOTIFY_WHEN_SUB_ITEM_COMPLETE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NOTIFY_WHEN_SUB_ITEM_FAILURE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">NOTIFY_WHEN_SUB_ITEM_FAILURE</text-property>
+                    <text-property name="heading">NOTIFY_WHEN_SUB_ITEM_FAILURE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LOCKED</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">LOCKED</text-property>
+                    <text-property name="heading">LOCKED</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PASSWORD_EXP_DATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PASSWORD_EXP_DATE</text-property>
+                    <text-property name="heading">PASSWORD_EXP_DATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SECURITY_QUESTION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SECURITY_QUESTION</text-property>
+                    <text-property name="heading">SECURITY_QUESTION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SECURITY_ANSWER</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SECURITY_ANSWER</text-property>
+                    <text-property name="heading">SECURITY_ANSWER</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ROLE_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ROLE_ID</text-property>
+                    <text-property name="heading">ROLE_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">IMAGE_ID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">IMAGE_ID</text-property>
+                    <text-property name="heading">IMAGE_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GENDER</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GENDER</text-property>
+                    <text-property name="heading">GENDER</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PAST_SERVICE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PAST_SERVICE</text-property>
+                    <text-property name="heading">PAST_SERVICE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LST_UNLOCK_TSTMP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">LST_UNLOCK_TSTMP</text-property>
+                    <text-property name="heading">LST_UNLOCK_TSTMP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LST_UPD_USR</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">LST_UPD_USR</text-property>
+                    <text-property name="heading">LST_UPD_USR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LST_UPD_TSTMP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">LST_UPD_TSTMP</text-property>
+                    <text-property name="heading">LST_UPD_TSTMP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MANAGE_SUB_SP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MANAGE_SUB_SP</text-property>
+                    <text-property name="heading">MANAGE_SUB_SP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MANAGE_OWN_SP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MANAGE_OWN_SP</text-property>
+                    <text-property name="heading">MANAGE_OWN_SP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CPNTTYPEID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CPNTTYPEID</text-property>
+                    <text-property name="heading">CPNTTYPEID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CPNTID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CPNTID</text-property>
+                    <text-property name="heading">CPNTID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">REVDATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">REVDATE</text-property>
+                    <text-property name="heading">REVDATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">REVNUM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">REVNUM</text-property>
+                    <text-property name="heading">REVNUM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SCHEDID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SCHEDID</text-property>
+                    <text-property name="heading">SCHEDID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CPNTDESC</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CPNTDESC</text-property>
+                    <text-property name="heading">CPNTDESC</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRADE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GRADE</text-property>
+                    <text-property name="heading">GRADE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">COMPLDATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">COMPLDATE</text-property>
+                    <text-property name="heading">COMPLDATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">COMPLSTATID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">COMPLSTATID</text-property>
+                    <text-property name="heading">COMPLSTATID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">COMPLSTATDESC</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">COMPLSTATDESC</text-property>
+                    <text-property name="heading">COMPLSTATDESC</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TOTALHRS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">TOTALHRS</text-property>
+                    <text-property name="heading">TOTALHRS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CREDITHRS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CREDITHRS</text-property>
+                    <text-property name="heading">CREDITHRS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CONTACTHRS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CONTACTHRS</text-property>
+                    <text-property name="heading">CONTACTHRS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CPEHRS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CPEHRS</text-property>
+                    <text-property name="heading">CPEHRS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TUITION</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">TUITION</text-property>
+                    <text-property name="heading">TUITION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTNAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTNAME</text-property>
+                    <text-property name="heading">INSTNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EVENTCOMMENTS</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">EVENTCOMMENTS</text-property>
+                    <text-property name="heading">EVENTCOMMENTS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ESUSERNAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ESUSERNAME</text-property>
+                    <text-property name="heading">ESUSERNAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LSTTMSP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">LSTTMSP</text-property>
+                    <text-property name="heading">LSTTMSP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ESIGMEANINGCODE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ESIGMEANINGCODE</text-property>
+                    <text-property name="heading">ESIGMEANINGCODE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CURRENCYCODE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CURRENCYCODE</text-property>
+                    <text-property name="heading">CURRENCYCODE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CURRENCYSYMBOL</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CURRENCYSYMBOL</text-property>
+                    <text-property name="heading">CURRENCYSYMBOL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DESCRIPTION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DESCRIPTION</text-property>
+                    <text-property name="heading">DESCRIPTION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACTIVE_99</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ACTIVE</text-property>
+                    <text-property name="heading">ACTIVE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">IS_DEFAULT</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">IS_DEFAULT</text-property>
+                    <text-property name="heading">IS_DEFAULT</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LABEL_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">LABEL_ID</text-property>
+                    <text-property name="heading">LABEL_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CPNT_CLASSIFICATION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CPNT_CLASSIFICATION</text-property>
+                    <text-property name="heading">CPNT_CLASSIFICATION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INITIAL_DATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INITIAL_DATE</text-property>
+                    <text-property name="heading">INITIAL_DATE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SCORE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SCORE</text-property>
+                    <text-property name="heading">SCORE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROVIDE_CRDT</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROVIDE_CRDT</text-property>
+                    <text-property name="heading">PROVIDE_CRDT</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">STARTDATE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">STARTDATE</text-property>
+                    <text-property name="heading">STARTDATE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">STUDID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">LASTNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">FIRSTNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">MIDDLENAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">EMP_STAT_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">EMP_TYP_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">JL_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">JP_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">TARGET_JP_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">JOB_TITLE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">DMN_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">ORG_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">REGION_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">CO_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">ACTIVE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">ADDR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">CITY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">STATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">POSTAL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">CNTRY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">SUPER</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">COACH_STUD_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">HIRE_DTE</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">TERM_DTE</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">EMAIL_ADDR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">RESUME_LOCN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">COMMENTS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">SHIPPING_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">SHIPPING_CONTACT_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">SHIPPING_ADDR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">SHIPPING_ADDR1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">SHIPPING_CITY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">SHIPPING_STATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">SHIPPING_POSTAL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">SHIPPING_CNTRY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">SHIPPING_PHON_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">SHIPPING_FAX_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">SHIPPING_EMAIL_ADDR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">STUD_PSWD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">40</property>
+                        <property name="name">PIN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">41</property>
+                        <property name="name">PIN_DATE</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">42</property>
+                        <property name="name">ENCRYPTED</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">43</property>
+                        <property name="name">HAS_ACCESS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">44</property>
+                        <property name="name">BILLING_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">45</property>
+                        <property name="name">BILLING_CONTACT_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">46</property>
+                        <property name="name">BILLING_ADDR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">47</property>
+                        <property name="name">BILLING_ADDR1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">48</property>
+                        <property name="name">BILLING_CITY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">49</property>
+                        <property name="name">BILLING_STATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">50</property>
+                        <property name="name">BILLING_POSTAL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">51</property>
+                        <property name="name">BILLING_CNTRY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">52</property>
+                        <property name="name">BILLING_PHON_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">53</property>
+                        <property name="name">BILLING_FAX_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">54</property>
+                        <property name="name">BILLING_EMAIL_ADDR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">55</property>
+                        <property name="name">SELF_REGISTRATION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">56</property>
+                        <property name="name">SELF_REGISTRATION_DATE</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">57</property>
+                        <property name="name">ACCESS_TO_ORG_FIN_ACT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">58</property>
+                        <property name="name">NOTIFY_DEV_PLAN_ITEM_ADD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">59</property>
+                        <property name="name">NOTIFY_DEV_PLAN_ITEM_MOD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">60</property>
+                        <property name="name">NOTIFY_DEV_PLAN_ITEM_REMOVE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">61</property>
+                        <property name="name">NOTIFY_WHEN_SUB_ITEM_COMPLETE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">62</property>
+                        <property name="name">NOTIFY_WHEN_SUB_ITEM_FAILURE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">63</property>
+                        <property name="name">LOCKED</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">64</property>
+                        <property name="name">PASSWORD_EXP_DATE</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">65</property>
+                        <property name="name">SECURITY_QUESTION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">66</property>
+                        <property name="name">SECURITY_ANSWER</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">67</property>
+                        <property name="name">ROLE_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">68</property>
+                        <property name="name">IMAGE_ID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">69</property>
+                        <property name="name">GENDER</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">70</property>
+                        <property name="name">PAST_SERVICE</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">71</property>
+                        <property name="name">LST_UNLOCK_TSTMP</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">72</property>
+                        <property name="name">LST_UPD_USR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">73</property>
+                        <property name="name">LST_UPD_TSTMP</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">74</property>
+                        <property name="name">MANAGE_SUB_SP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">75</property>
+                        <property name="name">MANAGE_OWN_SP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">76</property>
+                        <property name="name">CPNTTYPEID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">77</property>
+                        <property name="name">CPNTID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">78</property>
+                        <property name="name">REVDATE</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">79</property>
+                        <property name="name">REVNUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">80</property>
+                        <property name="name">SCHEDID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">81</property>
+                        <property name="name">CPNTDESC</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">82</property>
+                        <property name="name">GRADE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">83</property>
+                        <property name="name">COMPLDATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">84</property>
+                        <property name="name">COMPLSTATID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">85</property>
+                        <property name="name">COMPLSTATDESC</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">86</property>
+                        <property name="name">TOTALHRS</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">87</property>
+                        <property name="name">CREDITHRS</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">88</property>
+                        <property name="name">CONTACTHRS</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">89</property>
+                        <property name="name">CPEHRS</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">90</property>
+                        <property name="name">TUITION</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">91</property>
+                        <property name="name">INSTNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">92</property>
+                        <property name="name">EVENTCOMMENTS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">93</property>
+                        <property name="name">ESUSERNAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">94</property>
+                        <property name="name">LSTTMSP</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">95</property>
+                        <property name="name">ESIGMEANINGCODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">96</property>
+                        <property name="name">CURRENCYCODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">97</property>
+                        <property name="name">CURRENCYSYMBOL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">98</property>
+                        <property name="name">DESCRIPTION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">99</property>
+                        <property name="name">ACTIVE_99</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">100</property>
+                        <property name="name">IS_DEFAULT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">101</property>
+                        <property name="name">LABEL_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">102</property>
+                        <property name="name">CPNT_CLASSIFICATION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">103</property>
+                        <property name="name">INITIAL_DATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">104</property>
+                        <property name="name">SCORE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">105</property>
+                        <property name="name">PROVIDE_CRDT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">106</property>
+                        <property name="name">STARTDATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">PlateauDataSource</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">STUDID</property>
+                    <property name="nativeName">STUDID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">LASTNAME</property>
+                    <property name="nativeName">LASTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">FIRSTNAME</property>
+                    <property name="nativeName">FIRSTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">MIDDLENAME</property>
+                    <property name="nativeName">MIDDLENAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">EMP_STAT_ID</property>
+                    <property name="nativeName">EMP_STAT_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">EMP_TYP_ID</property>
+                    <property name="nativeName">EMP_TYP_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">JL_ID</property>
+                    <property name="nativeName">JL_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">JP_ID</property>
+                    <property name="nativeName">JP_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">TARGET_JP_ID</property>
+                    <property name="nativeName">TARGET_JP_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">JOB_TITLE</property>
+                    <property name="nativeName">JOB_TITLE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">DMN_ID</property>
+                    <property name="nativeName">DMN_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">ORG_ID</property>
+                    <property name="nativeName">ORG_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">REGION_ID</property>
+                    <property name="nativeName">REGION_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">CO_ID</property>
+                    <property name="nativeName">CO_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">ACTIVE</property>
+                    <property name="nativeName">ACTIVE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">ADDR</property>
+                    <property name="nativeName">ADDR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">CITY</property>
+                    <property name="nativeName">CITY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">STATE</property>
+                    <property name="nativeName">STATE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">POSTAL</property>
+                    <property name="nativeName">POSTAL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">CNTRY</property>
+                    <property name="nativeName">CNTRY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">SUPER</property>
+                    <property name="nativeName">SUPER</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">COACH_STUD_ID</property>
+                    <property name="nativeName">COACH_STUD_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">HIRE_DTE</property>
+                    <property name="nativeName">HIRE_DTE</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">TERM_DTE</property>
+                    <property name="nativeName">TERM_DTE</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">EMAIL_ADDR</property>
+                    <property name="nativeName">EMAIL_ADDR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">RESUME_LOCN</property>
+                    <property name="nativeName">RESUME_LOCN</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">COMMENTS</property>
+                    <property name="nativeName">COMMENTS</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">SHIPPING_NAME</property>
+                    <property name="nativeName">SHIPPING_NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">SHIPPING_CONTACT_NAME</property>
+                    <property name="nativeName">SHIPPING_CONTACT_NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">SHIPPING_ADDR</property>
+                    <property name="nativeName">SHIPPING_ADDR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">SHIPPING_ADDR1</property>
+                    <property name="nativeName">SHIPPING_ADDR1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">SHIPPING_CITY</property>
+                    <property name="nativeName">SHIPPING_CITY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">SHIPPING_STATE</property>
+                    <property name="nativeName">SHIPPING_STATE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">34</property>
+                    <property name="name">SHIPPING_POSTAL</property>
+                    <property name="nativeName">SHIPPING_POSTAL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">35</property>
+                    <property name="name">SHIPPING_CNTRY</property>
+                    <property name="nativeName">SHIPPING_CNTRY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">SHIPPING_PHON_NUM</property>
+                    <property name="nativeName">SHIPPING_PHON_NUM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">37</property>
+                    <property name="name">SHIPPING_FAX_NUM</property>
+                    <property name="nativeName">SHIPPING_FAX_NUM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">38</property>
+                    <property name="name">SHIPPING_EMAIL_ADDR</property>
+                    <property name="nativeName">SHIPPING_EMAIL_ADDR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">39</property>
+                    <property name="name">STUD_PSWD</property>
+                    <property name="nativeName">STUD_PSWD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">40</property>
+                    <property name="name">PIN</property>
+                    <property name="nativeName">PIN</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">41</property>
+                    <property name="name">PIN_DATE</property>
+                    <property name="nativeName">PIN_DATE</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">42</property>
+                    <property name="name">ENCRYPTED</property>
+                    <property name="nativeName">ENCRYPTED</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">43</property>
+                    <property name="name">HAS_ACCESS</property>
+                    <property name="nativeName">HAS_ACCESS</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">44</property>
+                    <property name="name">BILLING_NAME</property>
+                    <property name="nativeName">BILLING_NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">45</property>
+                    <property name="name">BILLING_CONTACT_NAME</property>
+                    <property name="nativeName">BILLING_CONTACT_NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">46</property>
+                    <property name="name">BILLING_ADDR</property>
+                    <property name="nativeName">BILLING_ADDR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">47</property>
+                    <property name="name">BILLING_ADDR1</property>
+                    <property name="nativeName">BILLING_ADDR1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">48</property>
+                    <property name="name">BILLING_CITY</property>
+                    <property name="nativeName">BILLING_CITY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">49</property>
+                    <property name="name">BILLING_STATE</property>
+                    <property name="nativeName">BILLING_STATE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">50</property>
+                    <property name="name">BILLING_POSTAL</property>
+                    <property name="nativeName">BILLING_POSTAL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">51</property>
+                    <property name="name">BILLING_CNTRY</property>
+                    <property name="nativeName">BILLING_CNTRY</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">52</property>
+                    <property name="name">BILLING_PHON_NUM</property>
+                    <property name="nativeName">BILLING_PHON_NUM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">53</property>
+                    <property name="name">BILLING_FAX_NUM</property>
+                    <property name="nativeName">BILLING_FAX_NUM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">54</property>
+                    <property name="name">BILLING_EMAIL_ADDR</property>
+                    <property name="nativeName">BILLING_EMAIL_ADDR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">55</property>
+                    <property name="name">SELF_REGISTRATION</property>
+                    <property name="nativeName">SELF_REGISTRATION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">56</property>
+                    <property name="name">SELF_REGISTRATION_DATE</property>
+                    <property name="nativeName">SELF_REGISTRATION_DATE</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">57</property>
+                    <property name="name">ACCESS_TO_ORG_FIN_ACT</property>
+                    <property name="nativeName">ACCESS_TO_ORG_FIN_ACT</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">58</property>
+                    <property name="name">NOTIFY_DEV_PLAN_ITEM_ADD</property>
+                    <property name="nativeName">NOTIFY_DEV_PLAN_ITEM_ADD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">59</property>
+                    <property name="name">NOTIFY_DEV_PLAN_ITEM_MOD</property>
+                    <property name="nativeName">NOTIFY_DEV_PLAN_ITEM_MOD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">60</property>
+                    <property name="name">NOTIFY_DEV_PLAN_ITEM_REMOVE</property>
+                    <property name="nativeName">NOTIFY_DEV_PLAN_ITEM_REMOVE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">61</property>
+                    <property name="name">NOTIFY_WHEN_SUB_ITEM_COMPLETE</property>
+                    <property name="nativeName">NOTIFY_WHEN_SUB_ITEM_COMPLETE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">62</property>
+                    <property name="name">NOTIFY_WHEN_SUB_ITEM_FAILURE</property>
+                    <property name="nativeName">NOTIFY_WHEN_SUB_ITEM_FAILURE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">63</property>
+                    <property name="name">LOCKED</property>
+                    <property name="nativeName">LOCKED</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">64</property>
+                    <property name="name">PASSWORD_EXP_DATE</property>
+                    <property name="nativeName">PASSWORD_EXP_DATE</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">65</property>
+                    <property name="name">SECURITY_QUESTION</property>
+                    <property name="nativeName">SECURITY_QUESTION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">66</property>
+                    <property name="name">SECURITY_ANSWER</property>
+                    <property name="nativeName">SECURITY_ANSWER</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">67</property>
+                    <property name="name">ROLE_ID</property>
+                    <property name="nativeName">ROLE_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">68</property>
+                    <property name="name">IMAGE_ID</property>
+                    <property name="nativeName">IMAGE_ID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">69</property>
+                    <property name="name">GENDER</property>
+                    <property name="nativeName">GENDER</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">70</property>
+                    <property name="name">PAST_SERVICE</property>
+                    <property name="nativeName">PAST_SERVICE</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">71</property>
+                    <property name="name">LST_UNLOCK_TSTMP</property>
+                    <property name="nativeName">LST_UNLOCK_TSTMP</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">72</property>
+                    <property name="name">LST_UPD_USR</property>
+                    <property name="nativeName">LST_UPD_USR</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">73</property>
+                    <property name="name">LST_UPD_TSTMP</property>
+                    <property name="nativeName">LST_UPD_TSTMP</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">74</property>
+                    <property name="name">MANAGE_SUB_SP</property>
+                    <property name="nativeName">MANAGE_SUB_SP</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">75</property>
+                    <property name="name">MANAGE_OWN_SP</property>
+                    <property name="nativeName">MANAGE_OWN_SP</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">76</property>
+                    <property name="name">CPNTTYPEID</property>
+                    <property name="nativeName">CPNTTYPEID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">77</property>
+                    <property name="name">CPNTID</property>
+                    <property name="nativeName">CPNTID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">78</property>
+                    <property name="name">REVDATE</property>
+                    <property name="nativeName">REVDATE</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">79</property>
+                    <property name="name">REVNUM</property>
+                    <property name="nativeName">REVNUM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">80</property>
+                    <property name="name">SCHEDID</property>
+                    <property name="nativeName">SCHEDID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">81</property>
+                    <property name="name">CPNTDESC</property>
+                    <property name="nativeName">CPNTDESC</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">82</property>
+                    <property name="name">GRADE</property>
+                    <property name="nativeName">GRADE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">83</property>
+                    <property name="name">COMPLDATE</property>
+                    <property name="nativeName">COMPLDATE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">84</property>
+                    <property name="name">COMPLSTATID</property>
+                    <property name="nativeName">COMPLSTATID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">85</property>
+                    <property name="name">COMPLSTATDESC</property>
+                    <property name="nativeName">COMPLSTATDESC</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">86</property>
+                    <property name="name">TOTALHRS</property>
+                    <property name="nativeName">TOTALHRS</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">87</property>
+                    <property name="name">CREDITHRS</property>
+                    <property name="nativeName">CREDITHRS</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">88</property>
+                    <property name="name">CONTACTHRS</property>
+                    <property name="nativeName">CONTACTHRS</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">89</property>
+                    <property name="name">CPEHRS</property>
+                    <property name="nativeName">CPEHRS</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">90</property>
+                    <property name="name">TUITION</property>
+                    <property name="nativeName">TUITION</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">8</property>
+                </structure>
+                <structure>
+                    <property name="position">91</property>
+                    <property name="name">INSTNAME</property>
+                    <property name="nativeName">INSTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">92</property>
+                    <property name="name">EVENTCOMMENTS</property>
+                    <property name="nativeName">EVENTCOMMENTS</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">93</property>
+                    <property name="name">ESUSERNAME</property>
+                    <property name="nativeName">ESUSERNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">94</property>
+                    <property name="name">LSTTMSP</property>
+                    <property name="nativeName">LSTTMSP</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">95</property>
+                    <property name="name">ESIGMEANINGCODE</property>
+                    <property name="nativeName">ESIGMEANINGCODE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">96</property>
+                    <property name="name">CURRENCYCODE</property>
+                    <property name="nativeName">CURRENCYCODE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">97</property>
+                    <property name="name">CURRENCYSYMBOL</property>
+                    <property name="nativeName">CURRENCYSYMBOL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">98</property>
+                    <property name="name">DESCRIPTION</property>
+                    <property name="nativeName">DESCRIPTION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">99</property>
+                    <property name="name">ACTIVE_99</property>
+                    <property name="nativeName">ACTIVE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">100</property>
+                    <property name="name">IS_DEFAULT</property>
+                    <property name="nativeName">IS_DEFAULT</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">101</property>
+                    <property name="name">LABEL_ID</property>
+                    <property name="nativeName">LABEL_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">102</property>
+                    <property name="name">CPNT_CLASSIFICATION</property>
+                    <property name="nativeName">CPNT_CLASSIFICATION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">103</property>
+                    <property name="name">INITIAL_DATE</property>
+                    <property name="nativeName">INITIAL_DATE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">104</property>
+                    <property name="name">SCORE</property>
+                    <property name="nativeName">SCORE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">105</property>
+                    <property name="name">PROVIDE_CRDT</property>
+                    <property name="nativeName">PROVIDE_CRDT</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">106</property>
+                    <property name="name">STARTDATE</property>
+                    <property name="nativeName">STARTDATE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT s.STUD_ID AS studID,
+  s.lname        AS lastName,
+  s.fname        AS firstName,
+  s.mi           AS middleName,
+  s.EMP_STAT_ID ,
+  s.EMP_TYP_ID ,
+  s.JL_ID ,
+  s.JP_ID ,
+  s.TARGET_JP_ID ,
+  s.JOB_TITLE ,
+  s.DMN_ID ,
+  s.ORG_ID ,
+  s.REGION_ID,
+  s.CO_ID ,
+  DECODE(s.NOTACTIVE,'Y','N','N','Y') AS active ,
+  s.ADDR ,
+  s.CITY ,
+  s.STATE ,
+  s.POSTAL ,
+  s.CNTRY,
+  s.SUPER ,
+  s.COACH_STUD_ID ,
+  s.HIRE_DTE,
+  s.TERM_DTE ,
+  s.EMAIL_ADDR,
+  s.RESUME_LOCN ,
+  s.COMMENTS ,
+  s.SHIPPING_NAME ,
+  s.SHIPPING_CONTACT_NAME,
+  s.SHIPPING_ADDR ,
+  s.SHIPPING_ADDR1 ,
+  s.SHIPPING_CITY ,
+  s.SHIPPING_STATE,
+  s.SHIPPING_POSTAL ,
+  s.SHIPPING_CNTRY ,
+  s.SHIPPING_PHON_NUM,
+  s.SHIPPING_FAX_NUM,
+  s.SHIPPING_EMAIL_ADDR ,
+  s.STUD_PSWD ,
+  s.PIN ,
+  s.PIN_DATE,
+  s.ENCRYPTED ,
+  s.HAS_ACCESS ,
+  s.BILLING_NAME ,
+  s.BILLING_CONTACT_NAME ,
+  s.BILLING_ADDR ,
+  s.BILLING_ADDR1 ,
+  s.BILLING_CITY ,
+  s.BILLING_STATE ,
+  s.BILLING_POSTAL,
+  s.BILLING_CNTRY ,
+  s.BILLING_PHON_NUM ,
+  s.BILLING_FAX_NUM ,
+  s.BILLING_EMAIL_ADDR ,
+  s.SELF_REGISTRATION ,
+  s.SELF_REGISTRATION_DATE,
+  s.ACCESS_TO_ORG_FIN_ACT ,
+  s.NOTIFY_DEV_PLAN_ITEM_ADD ,
+  s.NOTIFY_DEV_PLAN_ITEM_MOD ,
+  s.NOTIFY_DEV_PLAN_ITEM_REMOVE ,
+  s.NOTIFY_WHEN_SUB_ITEM_COMPLETE ,
+  s.NOTIFY_WHEN_SUB_ITEM_FAILURE ,
+  s.LOCKED ,
+  s.PASSWORD_EXP_DATE,
+  s.SECURITY_QUESTION ,
+  s.SECURITY_ANSWER ,
+  s.ROLE_ID ,
+  s.IMAGE_ID ,
+  s.GENDER ,
+  s.PAST_SERVICE,
+  s.LST_UNLOCK_TSTMP,
+  s.LST_UPD_USR,
+  s.LST_UPD_TSTMP,
+  s.MANAGE_SUB_SP,
+  s.MANAGE_OWN_SP,
+  e.cpnt_typ_id AS cpntTypeID,
+  e.cpnt_id     AS cpntID,
+  e.rev_dte     AS revDate,
+  e.rev_num     AS revNum,
+  e.schd_id     AS schedID,
+  cp.cpnt_title AS cpntDesc,
+  e.grade,
+  to_char(pkg_tool_get_new_date(e.compl_dte, 'UTC', 'Asia/Shanghai'), 'yyyy-MM-dd') AS complDate,  e.cmpl_stat_id        AS complStatID,
+  cs.cmpl_stat_desc     AS complStatDesc,
+  NVL(e.total_hrs, 0)   AS totalHrs,
+  NVL(e.credit_hrs, 0)  AS creditHrs,
+  NVL(e.contact_hrs, 0) AS contactHrs,
+  NVL(e.cpe_hrs, 0)     AS cpeHrs,
+  NVL(oi.price, 0)      AS tuition,
+  e.inst_name           AS instName,
+  e.comments            AS eventComments,
+  NVL(e.es_user_name,
+  CASE
+    WHEN INSTR(e.lst_upd_usr,'ADMIN PROXY - ') > 0
+    THEN e.lst_upd_usr
+    WHEN INSTR(e.lst_upd_usr,'User - ') > 0
+    THEN e.lst_upd_usr
+    WHEN INSTR(e.lst_upd_usr,'CONNECTOR') > 0
+    THEN e.lst_upd_usr
+    WHEN INSTR(e.lst_upd_usr,'INSTRUCTOR') > 0
+    THEN e.lst_upd_usr
+    WHEN INSTR(e.lst_upd_usr,' - ') = 0
+    THEN 'Admin - '
+      || e.lst_upd_usr
+  END )           AS esUserName,
+  e.lst_upd_tstmp AS lstTmsp,
+  e.esig_meaning_code_id
+  || '  '
+  || e.esig_meaning_code_desc AS esigMeaningCode,
+  e.currency_code             AS currencyCode,
+  cur.symbol                  AS currencySymbol,
+  cur.description,
+  cur.active,
+  cur.is_default,
+  cur.label_id,
+  cp.cpnt_classification,
+  to_char(pkg_tool_get_new_date(csc.INITIAL_DATE, 'UTC', 'Asia/Shanghai'), 'yyyy-MM-dd') AS INITIAL_DATE,
+  cscm.score,
+  cs.PROVIDE_CRDT,
+  to_char(pkg_tool_get_new_date(ex.START_DTE, 'UTC', 'Asia/Shanghai'), 'yyyy-MM-dd') AS startDate
+FROM pa_student s,
+  PA_CPNT_EVTHST e,
+  PA_CMPL_STAT cs,
+  pa_fin_order_item oi,
+  pa_currency cur,
+  pa_cpnt cp,
+  pa_program p,
+  pa_stud_program sp,
+  pa_cbt_stud_cpnt csc, 
+  pa_cbt_stud_cpnt_mod cscm,
+  PA_SCH_SEG ex
+WHERE e.stud_id             = s.stud_id
+AND e.cmpl_stat_id          = cs.cmpl_stat_id
+AND e.currency_code         = cur.currency_code(+)
+AND e.order_item_id         = oi.order_item_id(+)
+AND cp.cpnt_typ_id(+)       = e.cpnt_typ_id
+AND cp.cpnt_id(+)           = e.cpnt_id
+AND cp.rev_dte(+)           = e.rev_dte
+AND cp.cpnt_classification IN ('CONTINUOUS ONLINE ACCESS','BLENDED','PHYSICAL GOOD','TIME-BASED','EXTERNAL-COURSE','PROGRAM')
+AND e.cpnt_typ_id           = sp.cpnt_typ_id(+)
+AND e.cpnt_id               = sp.cpnt_id(+)
+AND e.rev_dte               = sp.rev_dte(+)
+AND e.stud_id               = sp.stud_id(+)
+AND e.compl_dte             = sp.compl_dte(+)
+AND sp.program_sys_guid     = p.program_sys_guid(+)
+-- add join
+AND e.cpnt_typ_id           = csc.cpnt_typ_id(+)
+AND e.cpnt_id               = csc.cpnt_id(+)
+AND e.rev_dte               = csc.rev_dte(+)
+AND e.stud_id               = csc.stud_id(+)
+and e.compl_dte             = csc.compl_dte(+)
+AND csc.STUD_CPNT_ID        = cscm.STUD_CPNT_ID(+)
+and csc.compl_dte           = cscm.complete_date(+)
+-- add join
+AND e.SCHD_ID           = ex.SCHD_ID(+)
+
+
+/**  and e.compl_dte >= [FromDate]
+and not (pkg_sql.subtract_seconds(e.compl_dte,86399)) >  [ToDate]
+and s.stud_id in [UserSearch]
+and (e.cpnt_typ_id, e.cpnt_id, e.rev_dte) in [ItemSearch]
+and [security:pa_student s] 
+and e.lst_upd_tstmp >= [LastModifiedTimeFrom]
+and not (pkg_sql.subtract_seconds(e.lst_upd_tstmp,86399)) >  [LastModifiedTimeTo] */
+AND e.LST_UPD_TSTMP >= NVL((select max(rjr.job_end_time)
+						from pa_report_job_result rjr
+						join pa_report_job rj on rjr.report_job_id = rj.report_job_id
+						and rjr.job_status = 'Succeeded'
+						and rj.type = 'RecurringReport'
+						where rj.report_name = 'UserLearningHistoryCSV_custom_HRMS_Classroom'), current_date -1)
+
+ORDER BY firstName,
+  lastName,
+  CPNTTYPEID,
+  CPNTID,
+  REVDATE]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="crosstab-cell" id="4">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="NewSimpleMasterPage" id="2241">
+            <property name="topMargin">1in</property>
+            <property name="leftMargin">1.25in</property>
+            <property name="bottomMargin">1in</property>
+            <property name="rightMargin">1.25in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table name="learningHistory" id="1813">
+            <property name="canShrink">true</property>
+            <property name="width">100%</property>
+            <property name="dataSet">students-eventhst-comments</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">STUDID</property>
+                    <expression name="expression">dataSetRow["STUDID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LASTNAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["LASTNAME"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">FIRSTNAME</property>
+                    <expression name="expression">dataSetRow["FIRSTNAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MIDDLENAME</property>
+                    <expression name="expression">dataSetRow["MIDDLENAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">EMP_STAT_ID</property>
+                    <expression name="expression">dataSetRow["EMP_STAT_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">EMP_TYP_ID</property>
+                    <expression name="expression">dataSetRow["EMP_TYP_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">JL_ID</property>
+                    <expression name="expression">dataSetRow["JL_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">JP_ID</property>
+                    <expression name="expression">dataSetRow["JP_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TARGET_JP_ID</property>
+                    <expression name="expression">dataSetRow["TARGET_JP_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">JOB_TITLE</property>
+                    <expression name="expression">dataSetRow["JOB_TITLE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DMN_ID</property>
+                    <expression name="expression">dataSetRow["DMN_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ORG_ID</property>
+                    <expression name="expression">dataSetRow["ORG_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">REGION_ID</property>
+                    <expression name="expression">dataSetRow["REGION_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CO_ID</property>
+                    <expression name="expression">dataSetRow["CO_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ACTIVE</property>
+                    <expression name="expression">dataSetRow["ACTIVE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ADDR</property>
+                    <expression name="expression">dataSetRow["ADDR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CITY</property>
+                    <expression name="expression">dataSetRow["CITY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">STATE</property>
+                    <expression name="expression">dataSetRow["STATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">POSTAL</property>
+                    <expression name="expression">dataSetRow["POSTAL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CNTRY</property>
+                    <expression name="expression">dataSetRow["CNTRY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SUPER</property>
+                    <expression name="expression">dataSetRow["SUPER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">COACH_STUD_ID</property>
+                    <expression name="expression">dataSetRow["COACH_STUD_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">HIRE_DTE</property>
+                    <expression name="expression">dataSetRow["HIRE_DTE"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">TERM_DTE</property>
+                    <expression name="expression">dataSetRow["TERM_DTE"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">EMAIL_ADDR</property>
+                    <expression name="expression">dataSetRow["EMAIL_ADDR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">RESUME_LOCN</property>
+                    <expression name="expression">dataSetRow["RESUME_LOCN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">COMMENTS</property>
+                    <expression name="expression">dataSetRow["COMMENTS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_NAME</property>
+                    <expression name="expression">dataSetRow["SHIPPING_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_CONTACT_NAME</property>
+                    <expression name="expression">dataSetRow["SHIPPING_CONTACT_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_ADDR</property>
+                    <expression name="expression">dataSetRow["SHIPPING_ADDR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_ADDR1</property>
+                    <expression name="expression">dataSetRow["SHIPPING_ADDR1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_CITY</property>
+                    <expression name="expression">dataSetRow["SHIPPING_CITY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_STATE</property>
+                    <expression name="expression">dataSetRow["SHIPPING_STATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_POSTAL</property>
+                    <expression name="expression">dataSetRow["SHIPPING_POSTAL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_CNTRY</property>
+                    <expression name="expression">dataSetRow["SHIPPING_CNTRY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_PHON_NUM</property>
+                    <expression name="expression">dataSetRow["SHIPPING_PHON_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_FAX_NUM</property>
+                    <expression name="expression">dataSetRow["SHIPPING_FAX_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SHIPPING_EMAIL_ADDR</property>
+                    <expression name="expression">dataSetRow["SHIPPING_EMAIL_ADDR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">STUD_PSWD</property>
+                    <expression name="expression">dataSetRow["STUD_PSWD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PIN</property>
+                    <expression name="expression">dataSetRow["PIN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PIN_DATE</property>
+                    <expression name="expression">dataSetRow["PIN_DATE"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ENCRYPTED</property>
+                    <expression name="expression">dataSetRow["ENCRYPTED"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">HAS_ACCESS</property>
+                    <expression name="expression">dataSetRow["HAS_ACCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_NAME</property>
+                    <expression name="expression">dataSetRow["BILLING_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_CONTACT_NAME</property>
+                    <expression name="expression">dataSetRow["BILLING_CONTACT_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_ADDR</property>
+                    <expression name="expression">dataSetRow["BILLING_ADDR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_ADDR1</property>
+                    <expression name="expression">dataSetRow["BILLING_ADDR1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_CITY</property>
+                    <expression name="expression">dataSetRow["BILLING_CITY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_STATE</property>
+                    <expression name="expression">dataSetRow["BILLING_STATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_POSTAL</property>
+                    <expression name="expression">dataSetRow["BILLING_POSTAL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_CNTRY</property>
+                    <expression name="expression">dataSetRow["BILLING_CNTRY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_PHON_NUM</property>
+                    <expression name="expression">dataSetRow["BILLING_PHON_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_FAX_NUM</property>
+                    <expression name="expression">dataSetRow["BILLING_FAX_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BILLING_EMAIL_ADDR</property>
+                    <expression name="expression">dataSetRow["BILLING_EMAIL_ADDR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SELF_REGISTRATION</property>
+                    <expression name="expression">dataSetRow["SELF_REGISTRATION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SELF_REGISTRATION_DATE</property>
+                    <expression name="expression">dataSetRow["SELF_REGISTRATION_DATE"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ACCESS_TO_ORG_FIN_ACT</property>
+                    <expression name="expression">dataSetRow["ACCESS_TO_ORG_FIN_ACT"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">NOTIFY_DEV_PLAN_ITEM_ADD</property>
+                    <expression name="expression">dataSetRow["NOTIFY_DEV_PLAN_ITEM_ADD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">NOTIFY_DEV_PLAN_ITEM_MOD</property>
+                    <expression name="expression">dataSetRow["NOTIFY_DEV_PLAN_ITEM_MOD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">NOTIFY_DEV_PLAN_ITEM_REMOVE</property>
+                    <expression name="expression">dataSetRow["NOTIFY_DEV_PLAN_ITEM_REMOVE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">NOTIFY_WHEN_SUB_ITEM_COMPLETE</property>
+                    <expression name="expression">dataSetRow["NOTIFY_WHEN_SUB_ITEM_COMPLETE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">NOTIFY_WHEN_SUB_ITEM_FAILURE</property>
+                    <expression name="expression">dataSetRow["NOTIFY_WHEN_SUB_ITEM_FAILURE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LOCKED</property>
+                    <expression name="expression">dataSetRow["LOCKED"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PASSWORD_EXP_DATE</property>
+                    <expression name="expression">dataSetRow["PASSWORD_EXP_DATE"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">SECURITY_QUESTION</property>
+                    <expression name="expression">dataSetRow["SECURITY_QUESTION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SECURITY_ANSWER</property>
+                    <expression name="expression">dataSetRow["SECURITY_ANSWER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ROLE_ID</property>
+                    <expression name="expression">dataSetRow["ROLE_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">IMAGE_ID</property>
+                    <expression name="expression">dataSetRow["IMAGE_ID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">GENDER</property>
+                    <expression name="expression">dataSetRow["GENDER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PAST_SERVICE</property>
+                    <expression name="expression">dataSetRow["PAST_SERVICE"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">LST_UNLOCK_TSTMP</property>
+                    <expression name="expression">dataSetRow["LST_UNLOCK_TSTMP"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">LST_UPD_USR</property>
+                    <expression name="expression">dataSetRow["LST_UPD_USR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LST_UPD_TSTMP</property>
+                    <expression name="expression">dataSetRow["LST_UPD_TSTMP"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">MANAGE_SUB_SP</property>
+                    <expression name="expression">dataSetRow["MANAGE_SUB_SP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MANAGE_OWN_SP</property>
+                    <expression name="expression">dataSetRow["MANAGE_OWN_SP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CPNTTYPEID</property>
+                    <expression name="expression">dataSetRow["CPNTTYPEID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CPNTID</property>
+                    <expression name="expression">dataSetRow["CPNTID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">REVDATE</property>
+                    <expression name="expression">dataSetRow["REVDATE"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">REVNUM</property>
+                    <expression name="expression">dataSetRow["REVNUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SCHEDID</property>
+                    <expression name="expression">dataSetRow["SCHEDID"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">CPNTDESC</property>
+                    <expression name="expression" type="javascript">dataSetRow["CPNTDESC"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">GRADE</property>
+                    <expression name="expression">dataSetRow["GRADE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">COMPLDATE</property>
+                    <expression name="expression" type="javascript">dataSetRow["COMPLDATE"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">COMPLSTATID</property>
+                    <expression name="expression">dataSetRow["COMPLSTATID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">COMPLSTATDESC</property>
+                    <expression name="expression">reportContext.getMessage(dataSetRow["COMPLSTATDESC"], reportContext.getLocale())</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTALHRS</property>
+                    <expression name="expression">dataSetRow["TOTALHRS"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">CREDITHRS</property>
+                    <expression name="expression">dataSetRow["CREDITHRS"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">CONTACTHRS</property>
+                    <expression name="expression">dataSetRow["CONTACTHRS"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">CPEHRS</property>
+                    <expression name="expression">dataSetRow["CPEHRS"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TUITION</property>
+                    <expression name="expression">dataSetRow["TUITION"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">INSTNAME</property>
+                    <expression name="expression">dataSetRow["INSTNAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">EVENTCOMMENTS</property>
+                    <expression name="expression">dataSetRow["EVENTCOMMENTS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ESUSERNAME</property>
+                    <expression name="expression">dataSetRow["ESUSERNAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LSTTMSP</property>
+                    <expression name="expression">dataSetRow["LSTTMSP"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ESIGMEANINGCODE</property>
+                    <expression name="expression">dataSetRow["ESIGMEANINGCODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CURRENCYCODE</property>
+                    <expression name="expression">dataSetRow["CURRENCYCODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CURRENCYSYMBOL</property>
+                    <expression name="expression">dataSetRow["CURRENCYSYMBOL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DESCRIPTION</property>
+                    <expression name="expression">dataSetRow["DESCRIPTION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ACTIVE_99</property>
+                    <expression name="expression">dataSetRow["ACTIVE_99"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">IS_DEFAULT</property>
+                    <expression name="expression">dataSetRow["IS_DEFAULT"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LABEL_ID</property>
+                    <expression name="expression">dataSetRow["LABEL_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ACTIVE USER</property>
+                    <expression name="expression">dataSetRow["ACTIVE"]</expression>
+                </structure>
+                <structure>
+                    <property name="name">Type</property>
+                    <expression name="expression" type="javascript">if(dataSetRow["CPNT_CLASSIFICATION"]  == "CONTINUOUS ONLINE ACCESS" || &#13;
+dataSetRow["CPNT_CLASSIFICATION"]  == "EXTERNAL-COURSE" ||&#13;
+dataSetRow["CPNT_CLASSIFICATION"]  == "BLENDED" ||&#13;
+dataSetRow["CPNT_CLASSIFICATION"]  == "PHYSICAL GOOD" ||&#13;
+dataSetRow["CPNT_CLASSIFICATION"]  == "TIME-BASED"){&#13;
+reportContext.getMessage('label.Component', reportContext.getLocale())&#13;
+} else if (dataSetRow["CPNT_CLASSIFICATION"]  == "PROGRAM"){&#13;
+reportContext.getMessage('label.Program', reportContext.getLocale())&#13;
+}</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">INITIAL_DATE</property>
+                    <text-property name="displayName">INITIAL_DATE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["INITIAL_DATE"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">SCORE</property>
+                    <text-property name="displayName">SCORE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["SCORE"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <text-property name="displayName">PROVIDE_CRDT</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROVIDE_CRDT"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Blank</property>
+                    <expression name="expression" type="javascript">""</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">STARTDATE</property>
+                    <text-property name="displayName">STARTDATE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["STARTDATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="sortByGroups">true</property>
+            <column id="2258">
+                <property name="repeat">1</property>
+            </column>
+            <column id="1829">
+                <property name="width">0.9583333333333334in</property>
+            </column>
+            <column id="2311">
+                <property name="repeat">1</property>
+            </column>
+            <column id="2349">
+                <property name="repeat">1</property>
+                <property name="width">1.0833333333333333in</property>
+            </column>
+            <column id="2276">
+                <property name="repeat">1</property>
+            </column>
+            <column id="2362">
+                <property name="repeat">1</property>
+                <property name="width">0.9166666666666666in</property>
+            </column>
+            <column id="2296">
+                <property name="repeat">1</property>
+            </column>
+            <column id="2423">
+                <property name="repeat">1</property>
+                <property name="width">0.6458333333333334in</property>
+            </column>
+            <column id="2454">
+                <property name="repeat">1</property>
+            </column>
+            <column id="2460">
+                <property name="repeat">1</property>
+            </column>
+            <header>
+                <row id="1814">
+                    <cell id="2259">
+                        <label id="2260">
+                            <text-property name="text" key="label.ComponentType">Item Type</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1815">
+                        <label id="1833">
+                            <property name="fontFamily">"Arial"</property>
+                            <property name="fontSize">small</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="marginTop">0pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text" key="label.Student">User</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2308">
+                        <label id="2312">
+                            <text-property name="text" key="label.EntityTitle">Training Name</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2346">
+                        <label id="2350">
+                            <text-property name="text" key="label.StartDate">Date Started</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2277">
+                        <label id="2278">
+                            <text-property name="text" key="label.CompletionDate">Date Completed</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2359">
+                        <label id="2376">
+                            <text-property name="text" key="label.Score">Score</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2297">
+                        <label id="2298">
+                            <text-property name="text" key="label.CompletionStatusID">Completion Status</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2424">
+                        <label id="2425">
+                            <text-property name="text" key="label.EntityID">Course Code</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2451">
+                        <label id="2455">
+                            <text-property name="text" key="label.TotalHour">TOTALHRS</text-property>
+                        </label>
+                    </cell>
+                    <cell id="2457">
+                        <label id="2461">
+                            <text-property name="text" key="label.InstructorName">INSTNAME</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="1819">
+                    <cell id="2261">
+                        <data id="2262">
+                            <property name="resultSetColumn">CPNTTYPEID</property>
+                        </data>
+                    </cell>
+                    <cell id="1820">
+                        <text id="1899">
+                            <property name="eventHandlerClass">com.plateau.common.reportservice.impl.PlateauTextItemEventHandler</property>
+                            <property name="newHandlerOnEachEvent">true</property>
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">SHOW_INPUT</property>
+                                    <property name="type">boolean</property>
+                                    <property name="isVisible">true</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">OPERATOR_COLUMNS</property>
+                                    <property name="type">string</property>
+                                    <property name="isVisible">true</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">OPERATOR_NAME</property>
+                                    <property name="type">string</property>
+                                    <property name="isVisible">true</property>
+                                </structure>
+                            </list-property>
+                            <property name="SHOW_INPUT">true</property>
+                            <property name="OPERATOR_COLUMNS">STUDID</property>
+                            <property name="OPERATOR_NAME">MaskStudentID</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[[STUDID]]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="2309">
+                        <data id="2313">
+                            <property name="eventHandlerClass">com.plateau.common.reportservice.impl.PlateauDataItemEventHandler</property>
+                            <property name="newHandlerOnEachEvent">true</property>
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">FORMAT_TYPE</property>
+                                    <property name="type">string</property>
+                                    <property name="isVisible">true</property>
+                                </structure>
+                            </list-property>
+                            <property name="FORMAT_TYPE">Label-String</property>
+                            <property name="resultSetColumn">CPNTDESC</property>
+                        </data>
+                    </cell>
+                    <cell id="2347">
+                        <data id="2450">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">yyyy-mm-dd</property>
+                            </structure>
+                            <property name="resultSetColumn">STARTDATE</property>
+                        </data>
+                    </cell>
+                    <cell id="2279">
+                        <data id="2315">
+                            <property name="eventHandlerClass">com.plateau.common.reportservice.impl.PlateauDataItemEventHandler</property>
+                            <property name="newHandlerOnEachEvent">true</property>
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">FORMAT_TYPE</property>
+                                    <property name="type">string</property>
+                                    <property name="isVisible">true</property>
+                                </structure>
+                            </list-property>
+                            <property name="FORMAT_TYPE">DateTime</property>
+                            <property name="resultSetColumn">COMPLDATE</property>
+                        </data>
+                    </cell>
+                    <cell id="2360">
+                        <data id="2447">
+                            <property name="resultSetColumn">GRADE</property>
+                        </data>
+                    </cell>
+                    <cell id="2299">
+                        <data id="2300">
+                            <property name="resultSetColumn">COMPLSTATID</property>
+                        </data>
+                    </cell>
+                    <cell id="2426">
+                        <data id="2427">
+                            <property name="resultSetColumn">CPNTID</property>
+                        </data>
+                    </cell>
+                    <cell id="2452">
+                        <data id="2456">
+                            <property name="resultSetColumn">TOTALHRS</property>
+                        </data>
+                    </cell>
+                    <cell id="2458">
+                        <data id="2462">
+                            <property name="resultSetColumn">INSTNAME</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="1824">
+                    <cell id="2263"/>
+                    <cell id="1825"/>
+                    <cell id="2310"/>
+                    <cell id="2348"/>
+                    <cell id="2281"/>
+                    <cell id="2361"/>
+                    <cell id="2301"/>
+                    <cell id="2428"/>
+                    <cell id="2453"/>
+                    <cell id="2459"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
