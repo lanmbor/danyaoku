@@ -20,8 +20,10 @@ if filepath != '' and folderpath != '' and entriesperfile != 0:
         prefilelen = df1.index.size
         filenum = filenum + 1         
         if prefilelen > 0:
-            str1 = folderpath + '\\' + targetfilename + str(filenum)  + ".csv"
-            df1.to_csv(str1,index=False)
+#           str1 = folderpath + '\\' + targetfilename + str(filenum)  + ".csv"
+#           df1.to_csv(str1,index=False)
+            str1 = folderpath + '\\' + targetfilename + str(filenum)  + ".xlsx"
+            df1.to_excel(str1,sheet_name='Sheet1',index=False)
     tk.messagebox.showinfo(title='Excel拆分', message='数据拆分成功', parent = toproot)
 else:
     tk.messagebox.showinfo(title='Excel拆分', message='数据拆分取消', parent = toproot)
